@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class TransformationNombreEnTexte {
+public class TransformationNombreEnTexte implements TransformationNombreEnTexteInterface{
 
     private static final Logger LOGGER = LoggerFactory.getLogger(TransformationNombreEnTexte.class);
     public static final String LANGUE_PAR_DEFAUT = "FR";
