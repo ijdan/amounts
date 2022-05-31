@@ -1,5 +1,6 @@
 package com.ijdan.amounts.corelogic;
 
+import com.ijdan.amounts.corelogic.ports.TransformationNombreEnTexteInterface;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

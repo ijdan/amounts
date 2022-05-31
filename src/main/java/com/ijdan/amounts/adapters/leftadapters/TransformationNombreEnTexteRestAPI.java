@@ -1,6 +1,6 @@
 package com.ijdan.amounts.adapters.leftadapters;
 
-import com.ijdan.amounts.corelogic.TransformationNombreEnTexteInterface;
+import com.ijdan.amounts.corelogic.ports.TransformationNombreEnTexteInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -21,11 +21,11 @@ public class TransformationNombreEnTexteRestAPI {
     @ResponseStatus(HttpStatus.OK)
 
     public @ResponseBody
-    StringReponse transformerNombreEnTexte
+    StructureReponseAPI transformerNombreEnTexte
             (@PathVariable(value="value") String value,
              @PathVariable(value="langue") String langue)
     {
-        return new StringReponse(transformationNombreEnTexteInterface.transformerLeNombreEnTexte(value, langue));
+        return new StructureReponseAPI(transformationNombreEnTexteInterface.transformerLeNombreEnTexte(value, langue));
     }
 
 }

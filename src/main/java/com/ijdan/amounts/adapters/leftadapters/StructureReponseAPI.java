@@ -1,6 +1,6 @@
 package com.ijdan.amounts.adapters.leftadapters;
 
-public class StringReponse {
+public class StructureReponseAPI {
     private String response;
 
     public String getResponse() {
@@ -11,7 +11,7 @@ public class StringReponse {
         this.response = response;
     }
 
-    public StringReponse(String reponse){
+    public StructureReponseAPI(String reponse){
         this.response = reponse;
     }
 }

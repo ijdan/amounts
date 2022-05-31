@@ -1,7 +1,8 @@
-package com.ijdan.amounts.corelogic;
+package com.ijdan.amounts.corelogic.ports;
 
-import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Component;
 
+@Component
 public interface TransformationNombreEnTexteInterface {
     String transformerLeNombreEnTexte(String nombre, String langue);
 }
