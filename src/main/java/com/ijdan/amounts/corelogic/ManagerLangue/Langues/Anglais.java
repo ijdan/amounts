@@ -71,7 +71,7 @@ public class Anglais implements LangueInterface {
         GRAND_NOMBRES_ELEMENTAIRES.put("1000000000000000", "Quadrillion");
     }
 
-    ReglesCommunes reglesCommunes;
+    private ReglesCommunes reglesCommunes;
 
     @Override
     public String transformerLeNombreEnTexte(String nombre){

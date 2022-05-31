@@ -10,7 +10,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest
 public class TransformationNombreEnTexteTest {
     @Autowired
-    private TransformationNombreEnTexteInterface transformationNombreEnTexteInterface;
+    TransformationNombreEnTexteInterface transformationNombreEnTexteInterface;
 
     @Test
     void transformerLeNombreEnTexteFrancaisTest() throws Exception {

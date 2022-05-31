@@ -25,7 +25,7 @@ public class TransformationNombreEnTexteRestAPI {
             (@PathVariable(value="value") String value,
              @PathVariable(value="langue") String langue)
     {
-        return new StructureReponseAPI(transformationNombreEnTexteInterface.transformerLeNombreEnTexte(value, langue));
+        return new StructureReponseAPI(value, langue, transformationNombreEnTexteInterface.transformerLeNombreEnTexte(value, langue));
     }
 
 }
