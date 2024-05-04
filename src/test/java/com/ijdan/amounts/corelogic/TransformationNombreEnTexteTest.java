@@ -13,116 +13,116 @@ public class TransformationNombreEnTexteTest {
     TransformationNombreEnTexteInterface transformationNombreEnTexteInterface;
 
     @Test
-    void transformerLeNombreEnTexteFrancaisTestZero() throws Exception {
+    void transformerLeNombreEnTexteFrancaisTestZero() {
         assertThat(transformationNombreEnTexteInterface.transformerLeNombreEnTexte("0", "FR")).isEqualTo("Zéro");
     }
     @Test
-    void transformerLeNombreEnTexteFrancaisTestDeux() throws Exception {
+    void transformerLeNombreEnTexteFrancaisTestDeux() {
         assertThat(transformationNombreEnTexteInterface.transformerLeNombreEnTexte("2", "FR")).isEqualTo("Deux");
     }
 
     @Test
-    void transformerLeNombreEnTexteFrancaisTestDix() throws Exception {
+    void transformerLeNombreEnTexteFrancaisTestDix() {
         assertThat(transformationNombreEnTexteInterface.transformerLeNombreEnTexte("10", "FR")).isEqualTo("Dix");
     }
 
     @Test
-    void transformerLeNombreEnTexteFrancaisTestVingtEtUn() throws Exception {
+    void transformerLeNombreEnTexteFrancaisTestVingtEtUn() {
         assertThat(transformationNombreEnTexteInterface.transformerLeNombreEnTexte("21", "FR")).isEqualTo("Vingt-et-un");
     }
 
     @Test
-    void transformerLeNombreEnTexteFrancaisTestVingtDeux() throws Exception {
+    void transformerLeNombreEnTexteFrancaisTestVingtDeux() {
         assertThat(transformationNombreEnTexteInterface.transformerLeNombreEnTexte("22", "FR")).isEqualTo("Vingt-deux");
     }
 
     @Test
-    void transformerLeNombreEnTexteFrancaisTestQuatreVingtUn() throws Exception {
+    void transformerLeNombreEnTexteFrancaisTestQuatreVingtUn() {
         assertThat(transformationNombreEnTexteInterface.transformerLeNombreEnTexte("81", "FR")).isEqualTo("Quatre-vingt-un");
     }
 
     @Test
-    void transformerLeNombreEnTexteFrancaisTestCentDeux() throws Exception {
+    void transformerLeNombreEnTexteFrancaisTestCentDeux() {
         assertThat(transformationNombreEnTexteInterface.transformerLeNombreEnTexte("102", "FR")).isEqualTo("Cent-deux");
     }
 
     @Test
-    void transformerLeNombreEnTexteFrancaisTestCentVingtEtUn() throws Exception {
+    void transformerLeNombreEnTexteFrancaisTestCentVingtEtUn() {
         assertThat(transformationNombreEnTexteInterface.transformerLeNombreEnTexte("121", "FR")).isEqualTo("Cent-vingt-et-un");
     }
 
     @Test
-    void transformerLeNombreEnTexteFrancaisTestCentVingtCinq() throws Exception {
+    void transformerLeNombreEnTexteFrancaisTestCentVingtCinq() {
         assertThat(transformationNombreEnTexteInterface.transformerLeNombreEnTexte("125", "FR")).isEqualTo("Cent-vingt-cinq");
     }
     @Test
-    void transformerLeNombreEnTexteFrancaisTestTroisCents() throws Exception {
+    void transformerLeNombreEnTexteFrancaisTestTroisCents() {
         assertThat(transformationNombreEnTexteInterface.transformerLeNombreEnTexte("300", "FR")).isEqualTo("Trois-cents");
     }
 
     @Test
-    void transformerLeNombreEnTexteFrancaisTestTroisCentQuaranteTrois() throws Exception {
+    void transformerLeNombreEnTexteFrancaisTestTroisCentQuaranteTrois() {
         assertThat(transformationNombreEnTexteInterface.transformerLeNombreEnTexte("343", "FR")).isEqualTo("Trois-cent-quarante-trois");
     }
 
     @Test
-    void transformerLeNombreEnTexteFrancaisTestCinqCentQuatreVingtDixSept() throws Exception {
+    void transformerLeNombreEnTexteFrancaisTestCinqCentQuatreVingtDixSept() {
         assertThat(transformationNombreEnTexteInterface.transformerLeNombreEnTexte("597", "FR")).isEqualTo("Cinq-cent-quatre-vingt-dix-sept");
     }
 
     @Test
-    void transformerLeNombreEnTexteFrancaisTestTroisMilleCinqCentQuatreVingtDixSept() throws Exception {
+    void transformerLeNombreEnTexteFrancaisTestTroisMilleCinqCentQuatreVingtDixSept() {
         assertThat(transformationNombreEnTexteInterface.transformerLeNombreEnTexte("3597", "FR")).isEqualTo("Trois-mille-cinq-cent-quatre-vingt-dix-sept");
     }
 
     @Test
-    void transformerLeNombreEnTexteFrancaisTestDixMilleCinqCentQuatreVingtDixSept() throws Exception {
+    void transformerLeNombreEnTexteFrancaisTestDixMilleCinqCentQuatreVingtDixSept() {
         assertThat(transformationNombreEnTexteInterface.transformerLeNombreEnTexte("10597", "FR")).isEqualTo("Dix-mille-cinq-cent-quatre-vingt-dix-sept");
     }
 
     @Test
-    void transformerLeNombreEnTexteFrancaisTestDeuxCentsMillions() throws Exception {
+    void transformerLeNombreEnTexteFrancaisTestDeuxCentsMillions() {
         assertThat(transformationNombreEnTexteInterface.transformerLeNombreEnTexte("200000000", "FR")).isEqualTo("Deux-cents-millions");
     }
 
     @Test
-    void transformerLeNombreEnTexteFrancaisTestDeuxCentsMilliards() throws Exception {
+    void transformerLeNombreEnTexteFrancaisTestDeuxCentsMilliards() {
         assertThat(transformationNombreEnTexteInterface.transformerLeNombreEnTexte("200000000000", "FR")).isEqualTo("Deux-cents-milliards");
     }
 
     @Test
-    void transformerLeNombreEnTexteFrancaisTestUnMilliardTroisMillionsQuatreCentVingtEtUnMilleCentNeuf() throws Exception {
+    void transformerLeNombreEnTexteFrancaisTestUnMilliardTroisMillionsQuatreCentVingtEtUnMilleCentNeuf() {
         assertThat(transformationNombreEnTexteInterface.transformerLeNombreEnTexte("1003421109", "FR")).isEqualTo("Un-milliard-trois-millions-quatre-cent-vingt-et-un-mille-cent-neuf");
     }
 
     @Test
-    void transformerLeNombreEnTexteFrancaisTestCentMillions() throws Exception {
+    void transformerLeNombreEnTexteFrancaisTestCentMillions() {
         assertThat(transformationNombreEnTexteInterface.transformerLeNombreEnTexte("100000000", "FR")).isEqualTo("Cent-millions");
     }
 
     @Test
-    void transformerLeNombreEnTexteFrancaisTestUnMillion() throws Exception {
+    void transformerLeNombreEnTexteFrancaisTestUnMillion() {
         assertThat(transformationNombreEnTexteInterface.transformerLeNombreEnTexte("1000000", "FR")).isEqualTo("Un-million");
     }
 
     @Test
-    void transformerLeNombreEnTexteFrancaisTestUnMilliard() throws Exception {
+    void transformerLeNombreEnTexteFrancaisTestUnMilliard() {
         assertThat(transformationNombreEnTexteInterface.transformerLeNombreEnTexte("1000000000", "FR")).isEqualTo("Un-milliard");
     }
 
     @Test
-    void transformerLeNombreEnTexteFrancaisTestUnMilliardUn() throws Exception {
+    void transformerLeNombreEnTexteFrancaisTestUnMilliardUn() {
         assertThat(transformationNombreEnTexteInterface.transformerLeNombreEnTexte("1000000001", "FR")).isEqualTo("Un-milliard-un");
     }
 
     @Test
-    void transformerLeNombreEnTexteFrancaisTestUnBillionCentMillionsDixMilleVingt() throws Exception {
+    void transformerLeNombreEnTexteFrancaisTestUnBillionCentMillionsDixMilleVingt() {
         assertThat(transformationNombreEnTexteInterface.transformerLeNombreEnTexte("1000100010020", "FR")).isEqualTo("Un-billion-cent-millions-dix-mille-vingt");
     }
 
 
     @Test
-    void transformerLeNombreEnTexteAnglaisTest() throws Exception {
+    void transformerLeNombreEnTexteAnglaisTest() {
 
         assertThat(
                 transformationNombreEnTexteInterface.transformerLeNombreEnTexte("0", "EN")
