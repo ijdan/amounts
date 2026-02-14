@@ -3,6 +3,7 @@ package com.ijdan.amounts.corelogic.ManagerLangue;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.stream.IntStream;
 
 @Component
 public class ReglesCommunes {
@@ -19,9 +20,8 @@ public class ReglesCommunes {
         ArrayList<String> nombreSubdiviseParMilliers = new ArrayList<>();
 
         int numberOfThousandsParts = recupererLeNombreDePartsDeMilliers(numberLength);
-        for(int i = 0; i < numberOfThousandsParts; i++) {
-            nombreSubdiviseParMilliers.add( nombre.substring(subStringStartDigit, subStringEndDigit) );
-
+        for (int i = 0; i < numberOfThousandsParts; i++) {
+            addSubdividedPart(nombre, nombreSubdiviseParMilliers, subStringStartDigit, subStringEndDigit);
             subStringStartDigit = subStringEndDigit;
             subStringEndDigit = subStringStartDigit + THOUSAND_PART_SIZE;
         }
@@ -29,13 +29,17 @@ public class ReglesCommunes {
         return nombreSubdiviseParMilliers;
     }
 
+    private void addSubdividedPart(String nombre, ArrayList<String> nombreSubdiviseParMilliers, int start, int end) {
+        nombreSubdiviseParMilliers.add(nombre.substring(start, end));
+    }
+
     public String recupererGrandNombreAssocie(int subdividedByThousandsLength, int positionCourante) {
-        if (positionCourante+1 < subdividedByThousandsLength) {
+        if (positionCourante + 1 < subdividedByThousandsLength) {
             String zeroADroiteCorrespond = new String(
-                    new char[(subdividedByThousandsLength-1- positionCourante)*THOUSAND_PART_SIZE]).
+                    new char[(subdividedByThousandsLength - 1 - positionCourante) * THOUSAND_PART_SIZE]).
                     replace("\0", "0");
             return "1".concat(zeroADroiteCorrespond);
-        }else {
+        } else {
             return null;
         }
     }
@@ -49,7 +53,7 @@ public class ReglesCommunes {
         return (int) Math.ceil(numberLength / THOUSAND_PART_SIZE);
     }
 
-    public String preparerLeNombre(String nombre){
+    public String preparerLeNombre(String nombre) {
         return nombre.trim();
     }
 

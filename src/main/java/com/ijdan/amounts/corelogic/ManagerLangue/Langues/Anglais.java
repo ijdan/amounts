@@ -9,18 +9,17 @@ import java.util.Map;
 
 public class Anglais implements LangueInterface {
 
-    public static final String CHIFFRE_UN   = "1";
+    public static final String CHIFFRE_UN = "1";
     public static final String CHIFFRE_CENT = "100";
 
-
-    public static final int THREE_DIGITS    = 3;
-    public static final int TWO_DIGITS      = 2;
-    public static final int ONE_DIGIT       = 1;
+    public static final int THREE_DIGITS = 3;
+    public static final int TWO_DIGITS = 2;
+    public static final int ONE_DIGIT = 1;
 
     public static final String COORDINATEUR_AND = "AND";
 
-    public static final String SEPARATEUR_MOTS      = " ";
-    public static final String SEPARATEUR_DIZAINE   = "-";
+    public static final String SEPARATEUR_MOTS = " ";
+    public static final String SEPARATEUR_DIZAINE = "-";
 
     private static final Map<String, String> SIMPLE_NOMBRES_ELEMENTAIRES;
     static {
@@ -74,12 +73,13 @@ public class Anglais implements LangueInterface {
     private ReglesCommunes reglesCommunes;
 
     @Override
-    public String transformerLeNombreEnTexte(String nombre){
+    public String transformerLeNombreEnTexte(String nombre) {
         reglesCommunes = new ReglesCommunes();
         reglesCommunes.preparerLeNombre(nombre);
 
         ArrayList<String> leNombreParPaquetsDeTrois = reglesCommunes.subdiviserLeNombreParMillier(nombre);
-        ArrayList<String> partiesATransformer = identifierToutesLesPartiesATransformer(nombre, leNombreParPaquetsDeTrois);
+        ArrayList<String> partiesATransformer = identifierToutesLesPartiesATransformer(nombre,
+                leNombreParPaquetsDeTrois);
         ArrayList<String> texteAssocieAChaquePartie = transformerChaquePartie(partiesATransformer);
 
         return alignerLesPartiesTransformeesEnUneSeulePhrase(texteAssocieAChaquePartie);
@@ -87,32 +87,34 @@ public class Anglais implements LangueInterface {
 
     private ArrayList<String> transformerChaquePartie(ArrayList<String> splitedNumber) {
         ArrayList<String> subdividedNumberOnText = new ArrayList<>();
-        for (int i = 0; i < splitedNumber.size(); i++){
+        for (int i = 0; i < splitedNumber.size(); i++) {
             transformerEnTexteLesComposantesPrononcables(splitedNumber, subdividedNumberOnText, i);
         }
         return subdividedNumberOnText;
     }
 
-    private ArrayList<String> identifierToutesLesPartiesATransformer(String nombre, ArrayList<String> partiesComposantLeNombreSubdiviseParMillier) {
+    private ArrayList<String> identifierToutesLesPartiesATransformer(String nombre,
+            ArrayList<String> partiesComposantLeNombreSubdiviseParMillier) {
         ArrayList<String> resultatSubdivisionDuNombre = new ArrayList<>();
         int nombreDePartiesATransformerEnTexte = partiesComposantLeNombreSubdiviseParMillier.size();
 
-        if (estUnChiffreElementaire(nombre)){
-            if (estNombreElementaireGrand(nombre)){
+        if (estUnChiffreElementaire(nombre)) {
+            if (estNombreElementaireGrand(nombre)) {
                 resultatSubdivisionDuNombre.add(CHIFFRE_UN);
             }
             resultatSubdivisionDuNombre.add(nombre);
-        }else {
+        } else {
             for (int i = 0; i < nombreDePartiesATransformerEnTexte; i++) {
                 String unePartie = partiesComposantLeNombreSubdiviseParMillier.get(i);
                 unePartie = reglesCommunes.supprimerLesZerosSuperflux(unePartie);
 
                 if (reglesCommunes.siPartieNonVide(unePartie)) {
-                    if (estNombreElementaireGrand(unePartie)){
+                    if (estNombreElementaireGrand(unePartie)) {
                         ajouterPartieAuxComposantesDuNombre(resultatSubdivisionDuNombre, CHIFFRE_UN);
                     }
                     ajouterPartieAuxComposantesDuNombre(resultatSubdivisionDuNombre, unePartie);
-                    siGrandNombreDetecteLeRajouterParmiLesComposantesDuNombre(resultatSubdivisionDuNombre, nombreDePartiesATransformerEnTexte, i);
+                    siGrandNombreDetecteLeRajouterParmiLesComposantesDuNombre(resultatSubdivisionDuNombre,
+                            nombreDePartiesATransformerEnTexte, i);
                 }
             }
         }
@@ -120,7 +122,8 @@ public class Anglais implements LangueInterface {
         return resultatSubdivisionDuNombre;
     }
 
-    private void siGrandNombreDetecteLeRajouterParmiLesComposantesDuNombre(ArrayList<String> resultatSubdivisionDuNombre, int nombreDePartiesATransformerEnTexte, int i) {
+    private void siGrandNombreDetecteLeRajouterParmiLesComposantesDuNombre(
+            ArrayList<String> resultatSubdivisionDuNombre, int nombreDePartiesATransformerEnTexte, int i) {
         String grandNombreAssocie = reglesCommunes.recupererGrandNombreAssocie(nombreDePartiesATransformerEnTexte, i);
         if (unePuissanceCorrespondanteTrouvee(grandNombreAssocie)) {
             ajouterPartieAuxComposantesDuNombre(resultatSubdivisionDuNombre, grandNombreAssocie);
@@ -134,62 +137,57 @@ public class Anglais implements LangueInterface {
     void ajouterPartieAuxComposantesDuNombre(ArrayList<String> resultatSubdivisionDuNombre, String onePart) {
         if (estUnChiffreElementaire(onePart)) {
             ajouterAuxPartiesComposantLeNombreADecomposer(resultatSubdivisionDuNombre, onePart);
-        }else {
+        } else {
             addDecomposedDigitPartToSubdividedNumber(resultatSubdivisionDuNombre, onePart);
         }
     }
 
-    private void addDecomposedDigitPartToSubdividedNumber(ArrayList<String> resultatSubdivisionDuNombre, String onePart) {
-        switch (onePart.length()) {
-            case THREE_DIGITS:
-                decomposerUnePartieDeLongueurTrois(resultatSubdivisionDuNombre, onePart);
-                break;
-            case TWO_DIGITS:
-                decomposerUnePartieDeLongueurDeux(resultatSubdivisionDuNombre, onePart);
-                break;
-            case ONE_DIGIT:
-                ajouterAuxPartiesComposantLeNombreADecomposer(resultatSubdivisionDuNombre, onePart);
-                break;
-            default:
-                throw new IllegalStateException("Unexpected value: " + onePart.length());
+    private void addDecomposedDigitPartToSubdividedNumber(ArrayList<String> resultatSubdivisionDuNombre,
+            String onePart) {
+        if (onePart.length() == THREE_DIGITS) {
+            decomposerUnePartieDeLongueurTrois(resultatSubdivisionDuNombre, onePart);
+        } else {
+            decomposerUnePartieDeLongueurDeux(resultatSubdivisionDuNombre, onePart);
         }
     }
 
-
     private void decomposerUnePartieDeLongueurDeux(ArrayList<String> resultatSubdivisionDuNombre, String onePart) {
-        //first part
-        ajouterAuxPartiesComposantLeNombreADecomposer(resultatSubdivisionDuNombre,onePart.substring(0, 1).concat("0"));
-        ajouterAuxPartiesComposantLeNombreADecomposer(resultatSubdivisionDuNombre,onePart.substring(1, 2));
+        // first part
+        ajouterAuxPartiesComposantLeNombreADecomposer(resultatSubdivisionDuNombre, onePart.substring(0, 1).concat("0"));
+        ajouterAuxPartiesComposantLeNombreADecomposer(resultatSubdivisionDuNombre, onePart.substring(1, 2));
     }
 
     private void decomposerUnePartieDeLongueurTrois(ArrayList<String> resultatSubdivisionDuNombre, String onePart) {
-        //first part
-        if (!onePart.startsWith(CHIFFRE_UN)) {
-            ajouterAuxPartiesComposantLeNombreADecomposer(resultatSubdivisionDuNombre,onePart.substring(0, 1));
-        }
+        // first part
+
+        ajouterAuxPartiesComposantLeNombreADecomposer(resultatSubdivisionDuNombre, onePart.substring(0, 1));
 
         ajouterAuxPartiesComposantLeNombreADecomposer(resultatSubdivisionDuNombre, CHIFFRE_CENT);
 
-        //second part
+        // second part
         if (estUnChiffreElementaire(reglesCommunes.supprimerLesZerosSuperflux(onePart.substring(1, 3)))) {
-            ajouterAuxPartiesComposantLeNombreADecomposer(resultatSubdivisionDuNombre,reglesCommunes.supprimerLesZerosSuperflux(onePart.substring(1, 3)));
+            ajouterAuxPartiesComposantLeNombreADecomposer(resultatSubdivisionDuNombre,
+                    reglesCommunes.supprimerLesZerosSuperflux(onePart.substring(1, 3)));
         } else {
-            ajouterAuxPartiesComposantLeNombreADecomposer(resultatSubdivisionDuNombre, onePart.substring(1, 2).concat("0"));
+            ajouterAuxPartiesComposantLeNombreADecomposer(resultatSubdivisionDuNombre,
+                    onePart.substring(1, 2).concat("0"));
             ajouterAuxPartiesComposantLeNombreADecomposer(resultatSubdivisionDuNombre, onePart.substring(2, 3));
         }
     }
 
-    private void ajouterAuxPartiesComposantLeNombreADecomposer(ArrayList<String> resultatSubdivisionDuNombre, String onePart) {
+    private void ajouterAuxPartiesComposantLeNombreADecomposer(ArrayList<String> resultatSubdivisionDuNombre,
+            String onePart) {
         if (reglesCommunes.siPartieNonVide(onePart)) {
             resultatSubdivisionDuNombre.add(onePart);
         }
     }
 
-    private void transformerEnTexteLesComposantesPrononcables(ArrayList<String> splitedNumber, ArrayList<String> subdividedNumberOnText, int digitPosition) {
+    private void transformerEnTexteLesComposantesPrononcables(ArrayList<String> splitedNumber,
+            ArrayList<String> subdividedNumberOnText, int digitPosition) {
         String onePart = splitedNumber.get(digitPosition);
         String texteCorrespondant = recupererLeTexteAssocieAuNombreElementaire(onePart);
         subdividedNumberOnText.add(texteCorrespondant);
-        if (estLeCasDuAndApresLeCent(splitedNumber, digitPosition)){
+        if (estLeCasDuAndApresLeCent(splitedNumber, digitPosition)) {
             subdividedNumberOnText.add(COORDINATEUR_AND);
         }
     }
@@ -203,12 +201,10 @@ public class Anglais implements LangueInterface {
     private String recupererLeTexteAssocieAuNombreElementaire(String number) {
         if (estUnNombreElementaireSimple(number)) {
             return recupererNombreElementaireSimple(number);
-        }else if (estNombreElementaireDizaine(number)) {
+        } else if (estNombreElementaireDizaine(number)) {
             return recupererNombreElementaireDizaine(number);
-        }else if (estNombreElementaireGrand(number)) {
+        } else {
             return recupererNombreElementaireGrand(number);
-        }else{
-            return null;
         }
     }
 
@@ -250,19 +246,17 @@ public class Anglais implements LangueInterface {
         StringBuilder resultingText = new StringBuilder();
         String precedenteValeur = null;
 
-        for (String actuelleValeur : subdividedNumberOnText){
+        for (String actuelleValeur : subdividedNumberOnText) {
             resultingText.append(choisirSeparateur(precedenteValeur, actuelleValeur).concat(actuelleValeur));
             precedenteValeur = actuelleValeur;
         }
 
-        return resultingText.substring(1, 2).
-                toUpperCase().
-                concat(resultingText.substring(2).
-                        toLowerCase());
+        return resultingText.substring(1, 2).toUpperCase().concat(resultingText.substring(2).toLowerCase());
     }
 
     String choisirSeparateur(String precedenteValeur, String actuelleValeur) {
-        return estLaRegleTiretEntreDeuxComposantes(precedenteValeur, actuelleValeur) ? SEPARATEUR_DIZAINE : SEPARATEUR_MOTS;
+        return estLaRegleTiretEntreDeuxComposantes(precedenteValeur, actuelleValeur) ? SEPARATEUR_DIZAINE
+                : SEPARATEUR_MOTS;
     }
 
     boolean estLaRegleTiretEntreDeuxComposantes(String precedenteValeur, String actuelleValeur) {
