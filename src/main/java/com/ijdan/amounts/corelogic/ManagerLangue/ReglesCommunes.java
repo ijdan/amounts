@@ -3,14 +3,12 @@ package com.ijdan.amounts.corelogic.ManagerLangue;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
-import java.util.stream.IntStream;
 
 @Component
 public class ReglesCommunes {
 
     public static final int THOUSAND_PART_SIZE = 3;
     public static final Long EMPTY_VALUE_NUMBER = 0L;
-
 
     public ArrayList<String> subdiviserLeNombreParMillier(String nombre) {
         int numberLength = nombre.length();
@@ -36,8 +34,8 @@ public class ReglesCommunes {
     public String recupererGrandNombreAssocie(int subdividedByThousandsLength, int positionCourante) {
         if (positionCourante + 1 < subdividedByThousandsLength) {
             String zeroADroiteCorrespond = new String(
-                    new char[(subdividedByThousandsLength - 1 - positionCourante) * THOUSAND_PART_SIZE]).
-                    replace("\0", "0");
+                    new char[(subdividedByThousandsLength - 1 - positionCourante) * THOUSAND_PART_SIZE])
+                    .replace("\0", "0");
             return "1".concat(zeroADroiteCorrespond);
         } else {
             return null;

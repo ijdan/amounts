@@ -11,7 +11,7 @@
     <artifactId>amounts</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>amounts</name>
-    <description>Amounts manager project</description>
+    <description>Number to Text Converter Service</description>
 
     <properties>
         <java.version>22</java.version>
@@ -39,21 +39,9 @@
             </exclusions>
         </dependency>
 
-
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-api</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-engine</artifactId>
-            <scope>test</scope>
-        </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
-            <version>3.4</version>
         </dependency>
     </dependencies>
 
@@ -69,15 +57,9 @@
                 <version>0.8.12</version>
                 <configuration>
                     <excludes>
-                        <exclude>
-                            com/ijdan/amounts/adapters/leftadapters/*.class
-                        </exclude>
-                        <exclude>
-                            com/ijdan/amounts/AmountsApplication.class
-                        </exclude>
-                        <exclude>
-                            com/ijdan/amounts/corelogic/parametres/*.class
-                        </exclude>
+                        <exclude>com/ijdan/amounts/adapters/leftadapters/*.class</exclude>
+                        <exclude>com/ijdan/amounts/AmountsApplication.class</exclude>
+                        <exclude>com/ijdan/amounts/corelogic/parametres/*.class</exclude>
                     </excludes>
                 </configuration>
                 <executions>

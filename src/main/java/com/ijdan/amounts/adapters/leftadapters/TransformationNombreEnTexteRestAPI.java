@@ -13,19 +13,14 @@ public class TransformationNombreEnTexteRestAPI {
     @Autowired
     private TransformationNombreEnTexteInterface transformationNombreEnTexteInterface;
 
-    @RequestMapping(
-            value = "/{langue}/value/{value}",
-            method = RequestMethod.GET,
-            produces = {MediaType.APPLICATION_JSON_VALUE}
-    )
+    @RequestMapping(value = "/{langue}/value/{value}", method = RequestMethod.GET, produces = {
+            MediaType.APPLICATION_JSON_VALUE })
     @ResponseStatus(HttpStatus.OK)
 
-    public @ResponseBody
-    StructureReponseAPI transformerNombreEnTexte
-            (@PathVariable(value="value") String value,
-             @PathVariable(value="langue") String langue)
-    {
-        return new StructureReponseAPI(value, langue, transformationNombreEnTexteInterface.transformerLeNombreEnTexte(value, langue));
+    public @ResponseBody StructureReponseAPI transformerNombreEnTexte(@PathVariable(value = "value") String value,
+            @PathVariable(value = "langue") String langue) {
+        return new StructureReponseAPI(transformationNombreEnTexteInterface.transformerLeNombreEnTexte(value, langue),
+                langue, value);
     }
 
 }

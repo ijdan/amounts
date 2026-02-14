@@ -1,20 +1,19 @@
 package com.ijdan.amounts.corelogic.ManagerLangue.Langues;
 
-import com.ijdan.amounts.corelogic.ManagerLangue.LangueInterface;
 import com.ijdan.amounts.corelogic.ManagerLangue.ReglesCommunes;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Anglais implements LangueInterface {
+@Component("EN")
+public class Anglais extends AbstractLangue {
 
     public static final String CHIFFRE_UN = "1";
     public static final String CHIFFRE_CENT = "100";
 
     public static final int THREE_DIGITS = 3;
-    public static final int TWO_DIGITS = 2;
-    public static final int ONE_DIGIT = 1;
 
     public static final String COORDINATEUR_AND = "AND";
 
@@ -70,30 +69,12 @@ public class Anglais implements LangueInterface {
         GRAND_NOMBRES_ELEMENTAIRES.put("1000000000000000", "Quadrillion");
     }
 
-    private ReglesCommunes reglesCommunes;
+    public Anglais(ReglesCommunes reglesCommunes) {
+        super(reglesCommunes);
+    }
 
     @Override
-    public String transformerLeNombreEnTexte(String nombre) {
-        reglesCommunes = new ReglesCommunes();
-        reglesCommunes.preparerLeNombre(nombre);
-
-        ArrayList<String> leNombreParPaquetsDeTrois = reglesCommunes.subdiviserLeNombreParMillier(nombre);
-        ArrayList<String> partiesATransformer = identifierToutesLesPartiesATransformer(nombre,
-                leNombreParPaquetsDeTrois);
-        ArrayList<String> texteAssocieAChaquePartie = transformerChaquePartie(partiesATransformer);
-
-        return alignerLesPartiesTransformeesEnUneSeulePhrase(texteAssocieAChaquePartie);
-    }
-
-    private ArrayList<String> transformerChaquePartie(ArrayList<String> splitedNumber) {
-        ArrayList<String> subdividedNumberOnText = new ArrayList<>();
-        for (int i = 0; i < splitedNumber.size(); i++) {
-            transformerEnTexteLesComposantesPrononcables(splitedNumber, subdividedNumberOnText, i);
-        }
-        return subdividedNumberOnText;
-    }
-
-    private ArrayList<String> identifierToutesLesPartiesATransformer(String nombre,
+    protected ArrayList<String> identifierToutesLesPartiesATransformer(String nombre,
             ArrayList<String> partiesComposantLeNombreSubdiviseParMillier) {
         ArrayList<String> resultatSubdivisionDuNombre = new ArrayList<>();
         int nombreDePartiesATransformerEnTexte = partiesComposantLeNombreSubdiviseParMillier.size();
@@ -122,67 +103,8 @@ public class Anglais implements LangueInterface {
         return resultatSubdivisionDuNombre;
     }
 
-    private void siGrandNombreDetecteLeRajouterParmiLesComposantesDuNombre(
-            ArrayList<String> resultatSubdivisionDuNombre, int nombreDePartiesATransformerEnTexte, int i) {
-        String grandNombreAssocie = reglesCommunes.recupererGrandNombreAssocie(nombreDePartiesATransformerEnTexte, i);
-        if (unePuissanceCorrespondanteTrouvee(grandNombreAssocie)) {
-            ajouterPartieAuxComposantesDuNombre(resultatSubdivisionDuNombre, grandNombreAssocie);
-        }
-    }
-
-    private boolean unePuissanceCorrespondanteTrouvee(String puissanceCorrespondanteALaPartie) {
-        return puissanceCorrespondanteALaPartie != null;
-    }
-
-    void ajouterPartieAuxComposantesDuNombre(ArrayList<String> resultatSubdivisionDuNombre, String onePart) {
-        if (estUnChiffreElementaire(onePart)) {
-            ajouterAuxPartiesComposantLeNombreADecomposer(resultatSubdivisionDuNombre, onePart);
-        } else {
-            addDecomposedDigitPartToSubdividedNumber(resultatSubdivisionDuNombre, onePart);
-        }
-    }
-
-    private void addDecomposedDigitPartToSubdividedNumber(ArrayList<String> resultatSubdivisionDuNombre,
-            String onePart) {
-        if (onePart.length() == THREE_DIGITS) {
-            decomposerUnePartieDeLongueurTrois(resultatSubdivisionDuNombre, onePart);
-        } else {
-            decomposerUnePartieDeLongueurDeux(resultatSubdivisionDuNombre, onePart);
-        }
-    }
-
-    private void decomposerUnePartieDeLongueurDeux(ArrayList<String> resultatSubdivisionDuNombre, String onePart) {
-        // first part
-        ajouterAuxPartiesComposantLeNombreADecomposer(resultatSubdivisionDuNombre, onePart.substring(0, 1).concat("0"));
-        ajouterAuxPartiesComposantLeNombreADecomposer(resultatSubdivisionDuNombre, onePart.substring(1, 2));
-    }
-
-    private void decomposerUnePartieDeLongueurTrois(ArrayList<String> resultatSubdivisionDuNombre, String onePart) {
-        // first part
-
-        ajouterAuxPartiesComposantLeNombreADecomposer(resultatSubdivisionDuNombre, onePart.substring(0, 1));
-
-        ajouterAuxPartiesComposantLeNombreADecomposer(resultatSubdivisionDuNombre, CHIFFRE_CENT);
-
-        // second part
-        if (estUnChiffreElementaire(reglesCommunes.supprimerLesZerosSuperflux(onePart.substring(1, 3)))) {
-            ajouterAuxPartiesComposantLeNombreADecomposer(resultatSubdivisionDuNombre,
-                    reglesCommunes.supprimerLesZerosSuperflux(onePart.substring(1, 3)));
-        } else {
-            ajouterAuxPartiesComposantLeNombreADecomposer(resultatSubdivisionDuNombre,
-                    onePart.substring(1, 2).concat("0"));
-            ajouterAuxPartiesComposantLeNombreADecomposer(resultatSubdivisionDuNombre, onePart.substring(2, 3));
-        }
-    }
-
-    private void ajouterAuxPartiesComposantLeNombreADecomposer(ArrayList<String> resultatSubdivisionDuNombre,
-            String onePart) {
-        if (reglesCommunes.siPartieNonVide(onePart)) {
-            resultatSubdivisionDuNombre.add(onePart);
-        }
-    }
-
-    private void transformerEnTexteLesComposantesPrononcables(ArrayList<String> splitedNumber,
+    @Override
+    protected void transformerEnTexteLesComposantesPrononcables(ArrayList<String> splitedNumber,
             ArrayList<String> subdividedNumberOnText, int digitPosition) {
         String onePart = splitedNumber.get(digitPosition);
         String texteCorrespondant = recupererLeTexteAssocieAuNombreElementaire(onePart);
@@ -221,6 +143,9 @@ public class Anglais implements LangueInterface {
     }
 
     public boolean estNombreElementaireGrand(String number) {
+        // Need to be public or package-private if used? It was private elsewhere?
+        // In AbstractLangue, usage might require visibility.
+        // It says "estNombreElementaireGrand" inside "estUnChiffreElementaire".
         return recupererNombreElementaireGrand(number) != null;
     }
 
@@ -232,7 +157,8 @@ public class Anglais implements LangueInterface {
         return recupererNombreElementaireSimple(number) != null;
     }
 
-    private boolean estUnChiffreElementaire(String number) {
+    @Override
+    protected boolean estUnChiffreElementaire(String number) {
         return estUnNombreElementaireSimple(number)
                 || estNombreElementaireDizaine(number)
                 || estNombreElementaireGrand(number);
@@ -242,7 +168,8 @@ public class Anglais implements LangueInterface {
         return splitedNumber.get(digitPosition).equals(CHIFFRE_CENT);
     }
 
-    private String alignerLesPartiesTransformeesEnUneSeulePhrase(ArrayList<String> subdividedNumberOnText) {
+    @Override
+    protected String alignerLesPartiesTransformeesEnUneSeulePhrase(ArrayList<String> subdividedNumberOnText) {
         StringBuilder resultingText = new StringBuilder();
         String precedenteValeur = null;
 
@@ -272,4 +199,18 @@ public class Anglais implements LangueInterface {
         return DIZAINE_NOMBRES_ELEMENTAIRES.containsValue(precedenteValeur);
     }
 
+    @Override
+    protected void decomposerUnePartieDeLongueurTrois(ArrayList<String> resultatSubdivisionDuNombre, String onePart) {
+        ajouterAuxPartiesComposantLeNombreADecomposer(resultatSubdivisionDuNombre, onePart.substring(0, 1));
+        ajouterAuxPartiesComposantLeNombreADecomposer(resultatSubdivisionDuNombre, CHIFFRE_CENT);
+
+        if (estUnChiffreElementaire(reglesCommunes.supprimerLesZerosSuperflux(onePart.substring(1, 3)))) {
+            ajouterAuxPartiesComposantLeNombreADecomposer(resultatSubdivisionDuNombre,
+                    reglesCommunes.supprimerLesZerosSuperflux(onePart.substring(1, 3)));
+        } else {
+            ajouterAuxPartiesComposantLeNombreADecomposer(resultatSubdivisionDuNombre,
+                    onePart.substring(1, 2).concat("0"));
+            ajouterAuxPartiesComposantLeNombreADecomposer(resultatSubdivisionDuNombre, onePart.substring(2, 3));
+        }
+    }
 }
