@@ -1,15 +1,16 @@
 package com.ijdan.amounts.adapters.leftadapters;
 
 public class StructureReponseAPI {
-    private String nombre;
+    private String inputNumber;
     private String response;
-    private String langue;
+    private String language;
 
-    public StructureReponseAPI(String reponse, String langue, String nombre){
+    public StructureReponseAPI(String reponse, String language, String inputNumber) {
         setResponse(reponse);
-        setLangue(langue);
-        setNombre(nombre);
+        setLanguage(language);
+        setInputNumber(inputNumber);
     }
+
     public String getResponse() {
         return response;
     }
@@ -18,20 +19,19 @@ public class StructureReponseAPI {
         this.response = response;
     }
 
-
-    public String getNombre() {
-        return nombre;
+    public String getInputNumber() {
+        return inputNumber;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setInputNumber(String inputNumber) {
+        this.inputNumber = inputNumber;
     }
 
-    public String getLangue() {
-        return langue;
+    public String getLanguage() {
+        return language;
     }
 
-    public void setLangue(String langue) {
-        this.langue = langue;
+    public void setLanguage(String language) {
+        this.language = language;
     }
 }

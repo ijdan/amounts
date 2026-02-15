@@ -1,15 +1,15 @@
 package com.ijdan.amounts.corelogic.ManagerLangue.Langues;
 
-import com.ijdan.amounts.corelogic.ManagerLangue.LangueInterface;
-import com.ijdan.amounts.corelogic.ManagerLangue.ReglesCommunes;
+import com.ijdan.amounts.corelogic.ManagerLangue.LanguageInterface;
+import com.ijdan.amounts.corelogic.ManagerLangue.CommonRules;
 
 import java.util.ArrayList;
 
-public abstract class AbstractLangue implements LangueInterface {
+public abstract class AbstractLanguage implements LanguageInterface {
 
-    protected final ReglesCommunes reglesCommunes;
+    protected final CommonRules reglesCommunes;
 
-    protected AbstractLangue(ReglesCommunes reglesCommunes) {
+    protected AbstractLanguage(CommonRules reglesCommunes) {
         this.reglesCommunes = reglesCommunes;
     }
 

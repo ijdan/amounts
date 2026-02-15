@@ -1,0 +1,11 @@
+{
+    "java.configuration.updateBuildConfiguration": "automatic",
+    "java.compile.nullAnalysis.mode": "automatic",
+    "java.configuration.runtimes": [
+        {
+            "name": "JavaSE-17",
+            "path": "/Users/nadjiberraf/Library/Java/JavaVirtualMachines/openjdk-22.0.1/Contents/Home",
+            "default": true
+        }
+    ]
+}

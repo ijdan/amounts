@@ -1,14 +1,12 @@
 package com.ijdan.amounts.corelogic.ManagerLangue.Langues;
 
-import com.ijdan.amounts.corelogic.ManagerLangue.ReglesCommunes;
+import com.ijdan.amounts.corelogic.ManagerLangue.CommonRules;
 
-import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-@Component("FR")
-public class Francais extends AbstractLangue {
+public class FrenchLanguage extends AbstractLanguage {
 
     public static final String CHIFFRE_UN = "1";
     public static final String CHIFFRE_CENT = "100";
@@ -84,7 +82,7 @@ public class Francais extends AbstractLangue {
         GRAND_NOMBRES_ELEMENTAIRES.put("1000000000000000", "Billiard");
     }
 
-    public Francais(ReglesCommunes reglesCommunes) {
+    public FrenchLanguage(CommonRules reglesCommunes) {
         super(reglesCommunes);
     }
 

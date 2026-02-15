@@ -1,11 +1,8 @@
 package com.ijdan.amounts.corelogic.ManagerLangue;
 
-import org.springframework.stereotype.Component;
-
 import java.util.ArrayList;
 
-@Component
-public class ReglesCommunes {
+public class CommonRules {
 
     public static final int THOUSAND_PART_SIZE = 3;
     public static final Long EMPTY_VALUE_NUMBER = 0L;

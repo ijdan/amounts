@@ -12,11 +12,13 @@ ITERATIONS = 60
 def generate_random_number():
     return random.randint(0, 999999999)
 
+from unidecode import unidecode
+
 def normalize_text(text, lang):
     """Normalize text for comparison by removing formatting differences."""
     if not text:
         return ""
-    text = text.lower()
+    text = unidecode(text).lower()
     text = text.replace("-", " ").replace(",", "")
     
     # Pre-processing (remove conjunctions)
@@ -66,12 +68,19 @@ def test_api():
             if response.status_code == 200:
                 data = response.json()
                 
-                api_input_number = data.get("nombre")
+                api_input_number = data.get("inputNumber")
                 api_text_result = data.get("response")
+                api_language = data.get("language")
                 
                 # Basic Check: Input number matches
                 if str(api_input_number) != str(number):
                     print(f"[{i}/{ITERATIONS}] FAILURE: {lang} {number} -> Number Mismatch. Got {api_input_number}")
+                    failure_count += 1
+                    continue
+
+                # Check Language match
+                if api_language != lang:
+                    print(f"[{i}/{ITERATIONS}] FAILURE: {lang} {number} -> Language Mismatch. Got {api_language}")
                     failure_count += 1
                     continue
 
