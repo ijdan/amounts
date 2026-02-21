@@ -26,4 +26,9 @@ Feature: Spanish Translation Accuracy
       | 21000   | Veintiún mil   |
       | 31000   | Treinta y un mil|
       | 1000000 | Un millón      |
-      | 2000000 | Dos millones   |
+      | 100000  | Cien mil         |
+      | 2000000000000 | Dos billones     |
+      | 41000000 | Cuarenta y un millones |
+      | 21000000 | Veintiún millones |
+      | 1000000000 | Un mil millones      |
+      | 2000000000 | Dos mil millones  |

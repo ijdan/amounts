@@ -34,6 +34,11 @@ public class TranslationSteps {
         }
     }
 
+    @Given("no target translation language is provided")
+    public void no_target_translation_language_is_provided() {
+        this.languageCode = null;
+    }
+
     @When("I process the number {string}")
     public void i_process_the_number(String number) {
         translationResult = numberToTextConverter.transformerLeNombreEnTexte(number, languageCode);

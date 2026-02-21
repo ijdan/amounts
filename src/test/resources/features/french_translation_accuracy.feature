@@ -64,3 +64,13 @@ Feature: French Translation Accuracy
       | 200000000000  | Deux-cents-milliards                                         |
       | 1003421109    | Un-milliard-trois-millions-quatre-cent-vingt-et-un-mille-cent-neuf |
       | 1000100010020 | Un-billion-cent-millions-dix-mille-vingt                     |
+
+  Scenario Outline: Translating numbers using the application's default fallback language
+    Given no target translation language is provided
+    When I process the number "<number>"
+    Then the translated result should exactly match "<expected_text>"
+
+    Examples:
+      | number | expected_text |
+      | 15     | Quinze        |
+      | 100    | Cent          |
