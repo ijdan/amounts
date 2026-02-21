@@ -11,6 +11,9 @@ public class LanguageFactory {
     }
 
     public LanguageInterface donneReglesParLangue(String langue) {
-        return langueMap.getOrDefault(langue, langueMap.get("FR"));
+        if (!langueMap.containsKey(langue)) {
+            throw new IllegalArgumentException("Language is not yet integrated.");
+        }
+        return langueMap.get(langue);
     }
 }
