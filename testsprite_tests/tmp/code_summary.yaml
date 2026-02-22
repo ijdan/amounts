@@ -1,0 +1,22 @@
+version: "2"
+type: backend
+tech_stack:
+  - Java
+  - Spring Boot
+  - Maven
+features:
+  - name: Number to Text Conversion API
+    description: API to convert numbers into their text representation in supported languages.
+    files:
+      - src/main/java/com/ijdan/amounts/adapters/leftadapters/NumberToTextConverterRestAPI.java
+      - src/main/java/com/ijdan/amounts/corelogic/NumberToTextConverter.java
+      - src/main/java/com/ijdan/amounts/corelogic/ManagerLangue/LanguageFactory.java
+    endpoints:
+      - method: GET
+        path: /T1.0/amounts/{langue}/value/{value}
+        description: Convert a number to text in the specified language.
+        auth_required: false
+        response_schema:
+          "200": StructureReponseAPI
+    depends_on: []
+known_limitations: []

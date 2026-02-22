@@ -12,7 +12,7 @@ public class LanguageFactory {
 
     public LanguageInterface donneReglesParLangue(String langue) {
         if (!langueMap.containsKey(langue)) {
-            throw new IllegalArgumentException("Language is not yet integrated.");
+            throw new IllegalArgumentException("Language '" + langue + "' is not yet integrated.");
         }
         return langueMap.get(langue);
     }

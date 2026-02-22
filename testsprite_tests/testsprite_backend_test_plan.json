@@ -1,0 +1,37 @@
+[
+  {
+    "id": "TC001",
+    "title": "get number to text conversion with valid english input",
+    "description": "Test the GET /T1.0/amounts/EN/value/{value} endpoint with a valid numeric input to verify it returns the correct English textual representation with status 200."
+  },
+  {
+    "id": "TC002",
+    "title": "get number to text conversion with valid french input",
+    "description": "Test the GET /T1.0/amounts/FR/value/{value} endpoint with a valid numeric input to verify it returns the correct French textual representation with status 200."
+  },
+  {
+    "id": "TC003",
+    "title": "get number to text conversion with valid spanish input",
+    "description": "Test the GET /T1.0/amounts/ES/value/{value} endpoint with a valid numeric input to verify it returns the correct Spanish textual representation with status 200."
+  },
+  {
+    "id": "TC004",
+    "title": "get number to text conversion with unsupported language input",
+    "description": "Test the GET /T1.0/amounts/{unsupported_language}/value/{value} endpoint with a valid numeric input to verify it falls back to French textual representation with status 200."
+  },
+  {
+    "id": "TC005",
+    "title": "get number to text conversion with non numeric input",
+    "description": "Test the GET /T1.0/amounts/EN/value/{non_numeric_value} endpoint with a non-numeric input to verify it returns a 400 error with message indicating invalid numeric value."
+  },
+  {
+    "id": "TC006",
+    "title": "get number to text conversion with out of range input",
+    "description": "Test the GET /T1.0/amounts/EN/value/{large_value} endpoint with a numeric input exceeding supported range to verify it returns a 400 error with message indicating value out of supported range."
+  },
+  {
+    "id": "TC007",
+    "title": "get number to text conversion with internal server error",
+    "description": "Simulate an internal server error on GET /T1.0/amounts/EN/value/{value} endpoint to verify it returns a 500 error with appropriate error message."
+  }
+]

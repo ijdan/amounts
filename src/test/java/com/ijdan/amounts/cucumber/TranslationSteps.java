@@ -29,6 +29,9 @@ public class TranslationSteps {
             case "SPANISH":
                 this.languageCode = "ES";
                 break;
+            case "DUTCH":
+                this.languageCode = "NL";
+                break;
             default:
                 this.languageCode = language.substring(0, 2).toUpperCase();
         }

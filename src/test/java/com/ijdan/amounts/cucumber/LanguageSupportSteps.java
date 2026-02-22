@@ -62,6 +62,8 @@ public class LanguageSupportSteps {
                 return "DE";
             case "ITALIAN":
                 return "IT";
+            case "DUTCH":
+                return "NL";
             case "PORTUGUESE":
                 return "PT";
             default:

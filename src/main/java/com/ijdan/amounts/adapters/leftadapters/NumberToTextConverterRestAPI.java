@@ -13,7 +13,7 @@ public class NumberToTextConverterRestAPI {
         @Autowired
         private NumberToTextConverterPort numberToTextConverterPort;
 
-        @RequestMapping(value = "/{langue}/value/{value}", method = RequestMethod.GET, produces = {
+        @RequestMapping(value = "/language/{langue}/value/{value}", method = RequestMethod.GET, produces = {
                         MediaType.APPLICATION_JSON_VALUE })
         @ResponseStatus(HttpStatus.OK)
 

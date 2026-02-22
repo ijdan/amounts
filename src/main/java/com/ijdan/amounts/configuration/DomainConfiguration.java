@@ -6,6 +6,8 @@ import com.ijdan.amounts.corelogic.ManagerLangue.CommonRules;
 import com.ijdan.amounts.corelogic.ManagerLangue.Langues.EnglishLanguage;
 import com.ijdan.amounts.corelogic.ManagerLangue.Langues.SpanishLanguage;
 import com.ijdan.amounts.corelogic.ManagerLangue.Langues.FrenchLanguage;
+import com.ijdan.amounts.corelogic.ManagerLangue.Langues.ItalianLanguage;
+import com.ijdan.amounts.corelogic.ManagerLangue.Langues.DutchLanguage;
 import com.ijdan.amounts.corelogic.NumberToTextConverter;
 import com.ijdan.amounts.corelogic.ports.ParametersRetrievalPort;
 import com.ijdan.amounts.corelogic.ports.NumberToTextConverterPort;
@@ -39,14 +41,28 @@ public class DomainConfiguration {
         return new SpanishLanguage(commonRules);
     }
 
+    @Bean("IT")
+    public LanguageInterface italiano(CommonRules commonRules) {
+        return new ItalianLanguage(commonRules);
+    }
+
+    @Bean("NL")
+    public LanguageInterface dutch(CommonRules commonRules) {
+        return new DutchLanguage(commonRules);
+    }
+
     @Bean("reglesParLangueFactory")
     public LanguageFactory langueFactory(@Qualifier("FR") LanguageInterface francais,
             @Qualifier("EN") LanguageInterface anglais,
-            @Qualifier("ES") LanguageInterface espagnol) {
+            @Qualifier("ES") LanguageInterface espagnol,
+            @Qualifier("IT") LanguageInterface italiano,
+            @Qualifier("NL") LanguageInterface dutch) {
         Map<String, LanguageInterface> langueMap = new HashMap<>();
         langueMap.put("FR", francais);
         langueMap.put("EN", anglais);
         langueMap.put("ES", espagnol);
+        langueMap.put("IT", italiano);
+        langueMap.put("NL", dutch);
         return new LanguageFactory(langueMap);
     }
 

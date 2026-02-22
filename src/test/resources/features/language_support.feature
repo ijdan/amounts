@@ -13,14 +13,14 @@ Feature: Language Support Handling
       | English  |
       | French   |
       | Spanish  |
+      | Italian  |
 
   Scenario Outline: Requesting a translation with an unsupported language
     Given the application does not yet recognize the language "<language>"
     When the user attempts to process data using the language "<language>"
-    Then the user should see the error message "Language is not yet integrated."
+    Then the user should see the error message "Language '<code_lang>' is not yet integrated."
 
     Examples:
-      | language   |
-      | German     |
-      | Italian    |
-      | Portuguese |
+      | language   | code_lang |
+      | German     | DE        |
+      | Portuguese | PT        |
